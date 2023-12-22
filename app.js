@@ -33,7 +33,7 @@ app.set('view engine', 'ejs');
 // Connect to MongoDB
 const dbUri = 'mongodb+srv://' + config.database.username + ':' + config.database.password + '@sdev255longsworth.oemxn7p.mongodb.net/Aardvark?retryWrites=true&w=majority';
 mongoose.connect(dbUri)
-    .then((result) => app.listen(process.env.port))
+    .then((result) => app.listen(3000))
     .catch((err) => console.log(err));
 
 // Route requests to appropriate pages
