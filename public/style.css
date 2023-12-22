@@ -1,0 +1,366 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;300;400;600&family=Unica+One&display=swap');
+
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: #424242;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 400;
+}
+
+.content {
+  height: auto;
+  display: grid;
+  place-items: center;
+  padding-top: 70px;
+}
+
+/* navbar */
+header {
+  font-family: 'Unica One', sans-serif;
+  background-color: #202020;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+nav {
+  float: right;
+}
+
+nav li {
+  position: relative;
+  display: inline-block;
+}
+
+nav a {
+  color: #cb8c2f;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 20px;
+}
+
+header ul {
+  padding: 0;
+}
+
+header li {
+  margin-left: 50px;
+  padding-top: 23px;
+}
+
+nav ul, main ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav a:hover {
+  color: #ac5633
+}
+
+header::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+nav a::before {
+  content: '';
+  display: block;
+  height: 5px;
+  background-color: #ac5633;
+  position: absolute;
+  top: 0;
+  width: 0%;
+  transition: all ease-in-out 250ms;
+}
+
+nav a:hover::before {
+  width: 100%;
+}
+
+.logo {
+  float: left;
+  padding: 15px 20px;
+  height: 40px;
+}
+
+.navbar {
+  width: 90%;
+  margin: 0 auto;
+}
+
+/* body */
+main li {
+  margin: 15px 10px;
+  display: inline-block;
+}
+
+section {
+  height: auto;
+  padding: 15px 35px;
+  border-top: 1px solid #878787;
+  border-bottom: 1px solid #878787;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  font-size: 2.6em;
+  color: #ac5633;
+}
+
+h2 {
+  font-size: 2em;
+  color: #cb8c2f;
+}
+
+h3 {
+  color: #878787
+}
+
+p, main ul, .hide-select {
+  color: #999;
+}
+
+#welcome-name {
+  font-size: 1.35em;
+  color: #878787;
+}
+
+#not-found {
+  margin: 250px auto;
+  font-weight: 600;
+  padding: 20px;
+  width: 80%;
+  border-top: none;
+  border-bottom: none;
+  font-size: 2em;
+}
+
+#hide-div {
+  padding: 30px;
+  background-color: #303030;
+}
+
+#hidden, #courses-offered, #hide-form {
+  width: 85%;
+  border-top: none;
+  border-bottom: none;
+}
+
+#courses-offered {
+  margin: 20px 0 0 0;
+}
+
+#welcome, #sign-up, #modify {
+  margin: 20px 0 0 0;
+  border-top: none;
+}
+
+#contact, #course-list, #signup-btn, #modify-class, #hidden {
+  margin: 0 0 20px 0;
+  border-bottom: none;
+}
+
+#signup, #login, #course-detail {
+  color: #878787;
+  margin: 20px 0 20px 0;
+  border-top: none;
+  border-bottom: none;
+}
+
+#add-class, #delete-class, #modify-class, #signup, #login, .hide-select {
+  color: #878787;
+  width: 90%;
+}
+
+#courses-offered, #course-list, #your-course-list {
+  text-align: left;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  width: 800px;
+}
+
+.contact-list {
+  text-align: center;
+}
+
+.course-heading {
+  font-weight: 600;
+}
+
+.courses {
+  padding-bottom: 10px;
+}
+
+.course-title {
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.credits {
+  font-weight:300;
+}
+
+.block {
+  display: block;
+  width: auto;
+  border: none;
+  border-radius: 5px;
+  background-color: #cb8c2f;
+  color: #202020;
+  padding: 12px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  float: center;
+}
+
+.block:hover {
+  background-color: #ac5633;
+}
+
+#course-list a, #your-course-list a {
+  display: block;
+  text-decoration: none;
+  margin: 40px;
+}
+
+#course-list a:hover h3, #your-course-list a:hover h3 {
+  color: #ac5633;
+  padding-left: 5px;
+  border-left: 6px solid #ac5633;
+}
+
+#welcome, #about-us, #contact, #signup, #login, #hidden, #sign-up, #signup-btn, #courses-offered, #course-detail, #course-list, #your-course-list, #modify, #add-class, #delete-class, #modify-class {
+  background-color: #303030;
+  padding: 30px;
+  width: 80%;
+}
+
+#welcome p, #about-us p, #contact p, #sign-up p, #courses-offered p, #course-detail p, #modify p, #hidden p {
+  padding: 0 20px;
+  line-height:1.35;
+}
+
+#single-course  a{
+  text-decoration: none;
+}
+
+/* forms, labels, inputs, textarea, select dropdowns, submit buttons */
+form * {
+  box-sizing: border-box;
+}
+
+input[type=text], input[type=password], select, textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #202020;
+  border-radius: 5px;
+  color: #878787;
+  resize: vertical;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+textarea {
+  resize: none;
+}
+
+input[type=text]:focus, input[type=password]:focus, textarea:focus {
+  background-color: #ac5633;
+  color: #fff;
+}
+
+input[type=text]:focus::placeholder, input[type=password]:focus::placeholder, textarea:focus::placeholder {
+  color: #fff;
+}
+
+select {
+  margin-bottom: 17px;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit], input[type=button], button {
+  background-color: #cb8c2f;
+  color: #202020;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  float: right;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+input[type=submit]:hover, input[type=button]:hover, button:hover {
+  background-color: #ac5633;
+}
+
+.add-section, .delete-section, .modify-section, .signup-section, .login-section, .hide-select, #hide-div {
+  border-radius: 5px;
+  background-color: #303030;
+  padding: 20px;
+  width: 90%;
+}
+
+#delete-button, #drop-button {
+  margin-left: 10px;
+}
+
+.label-col {
+  float: left;
+  width: 25%;
+  margin-top: 10px;
+}
+
+.input-col {
+  float: left;
+  width: 75%;
+  margin-top: 10px;
+}
+
+.row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* footer */
+footer {
+  position: relative;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  background-color: #202020;
+}
+
+/* adaptation for mobile screens */
+@media screen and (max-width: 600px) {
+  .label-col, .input-col, input[type=submit], input[type=button] {
+    width: 100%;
+    margin-top: 0;
+  }
+
+  @media screen and (max-width: 600px) {
+    .ellipsis {
+      width: 300px;
+    }
+  }
+}

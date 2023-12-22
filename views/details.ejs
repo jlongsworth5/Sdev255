@@ -1,0 +1,20 @@
+<html lang="en">
+    <%- include("./partials/head.ejs") %>
+
+<body>
+    <%- include("./partials/navbar.ejs") %>  
+
+  <main class="content">
+
+    <section id="course-detail">
+      <div class="section-inner">
+        <h1><span class="course-title"><%= course.cname %></span>&nbsp;<span class="credits">| <%= course.sarea %> | <%= course.chours %> Credits</span></h1>
+        <p><%= course.cdescript %></p>
+      </div>
+    </section>
+  </main>
+
+</body>
+<%- include("./partials/footer.ejs") %>
+
+</html>

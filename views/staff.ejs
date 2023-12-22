@@ -1,0 +1,119 @@
+<html lang="en">
+<%- include("./partials/head.ejs") %>
+
+<body>
+    <%- include("./partials/navbar.ejs") %>  
+
+  <main class="content">
+
+    <section id="modify">
+      <div class="section-inner">
+        <h1>Modify Courses</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. At deserunt magni molestiae. Est, minus? Obcaecati nemo modi, necessitatibus possimus deserunt tempora fugit numquam animi! Cum exercitationem deserunt nemo numquam suscipit!</p>
+      </div>
+    </section>
+
+    <section id="add-class">
+      <div class="add-section" >
+          <form action="/courses" method="POST">
+                        <div class="row">
+                          <div class="label-col">
+                            <label for="cname">Course Name</label>
+                          </div>
+                          <div class="input-col">
+                            <input type="text" id="cname" name="cname" placeholder="Course name.." autocomplete="off" required>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="label-col">
+                            <label for="cdescript">Course Description</label>
+                          </div>
+                          <div class="input-col">
+                            <textarea id="cdescript" name="cdescript" placeholder="Description of the course..." required rows="4" cols="50"></textarea>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="label-col">
+                            <label for="sarea">Subject Area</label>
+                          </div>
+                          <div class="input-col">
+                            <select name="sarea" id="sarea" required>
+                              <option value="">-- Choose a subject --</option>
+                              <% if (subjects.length > 0) { %>
+                                <% subjects.forEach(subject => { %>
+                                  <option value="<%= subject.title %>"><%= subject.title %></option>                                
+                                <% }) %>
+                              <% } else { %>
+                                <p>There are no subjects to select.</p>                              
+                              <% } %>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="label-col">
+                            <label for="chours">Credit Hours</label>
+                          </div>
+                          <div class="input-col">
+                            <input type="text" id="chours" name="chours" placeholder="Number of credit hours.." autocomplete="off" required>
+                          </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                          <input type="submit" value="  Add  ">
+                        </div>
+          </form>                
+      </div>
+    </section>
+
+    <section id="modify-class">
+      <div class="add-section">
+        <div class="row">
+          <div class="label-col">
+            <label for="cname">Course Name</label>
+          </div>
+          <div class="input-col">
+            <select name="cname" id="cname-select" required>
+              <% if (courses.length > 0) { %>
+                <% courses.forEach(course => { %>
+                  <option value="<%= course._id %>"><%= course.cname %></option>                                
+                <% }) %>
+              <% } else { %>
+                <p>There are no courses to select.</p>                              
+              <% } %>
+          </div>
+      </div>      
+      <input type="button" class="modify" value="Modify" >
+    </section>   
+
+  </main>
+  <%- include("./partials/footer.ejs") %>
+
+  <script>
+    const modifyButton = document.querySelector('input.modify');
+    const modifySelect = document.getElementById('cname-select');
+    let selectedCourseId; 
+    selectedCourseId = GetSelectedOption(modifySelect);
+
+    // Detemine which class is selected for modification
+    modifySelect.addEventListener('change', (e) => {
+      GetSelectedOption(modifySelect);
+    });
+
+    // Redirect to the update page for the selected class
+    modifyButton.addEventListener('click', (e) => {      
+      const endPoint = `/update/${selectedCourseId}`;
+
+      window.location.href = endPoint;
+    });
+
+    // Determine the id for the currently selected class in the modification drop down
+    function GetSelectedOption(modifySelect) {
+      let options = modifySelect.getElementsByTagName('option');
+      selectedCourseId = options[modifySelect.selectedIndex].value;
+      return selectedCourseId;
+    }
+</script>
+
+</body>
+
+</html>

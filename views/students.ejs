@@ -1,0 +1,164 @@
+<html lang="en">
+<%- include("./partials/head.ejs") %>
+
+<body>
+    <%- include("./partials/navbar.ejs") %>  
+
+  <main class="content">
+
+    <section id="sign-up">
+      <div class="section-inner">
+        <h1>Modify Your Schedule</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur voluptatum maxime beatae qui quod. Amet minus accusantium nesciunt provident, sint tempore ratione aliquam sed harum labore possimus sit laudantium nisi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Est accusantium sint praesentium numquam inventore et autem corporis reprehenderit accusamus necessitatibus nisi dicta non, perferendis rem fugit animi distinctio, aspernatur nesciunt?</p>
+      </div>
+    </section>
+
+    <section id="your-course-list">
+      <div class="section-inner">
+        <h2 class="courses">Your Current Schedule</h2>
+
+        <% if (registrations.length > 0) { %>
+          <% registrations.forEach(registration => { %>
+            <h3><span class="course-title"><%= registration.course %></span></h3>                               
+          <% }) %>
+        <% } else { %>
+            <p>There are no courses to display...</p>
+        <% } %>
+      </div>
+    </section>
+
+    <section id="signup-btn">
+      <div class="section-inner">
+        <button type="button" class="block" onclick="hideFunction()">Add/Drop Classes</button> 
+      </div>
+    </section>  
+
+    <section id="hidden" style="display:none">
+      <div id="hide-div">
+        <h2>Add or Drop Courses</h2>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veniam repudiandae laborum corporis eaque 
+          necessitatibus eum, perferendis at distinctio laudantium delectus tenetur, quas eius sint deleniti 
+          reprehenderit culpa repellendus! Totam, ratione. Lorem ipsum dolor, sit amet consectetur adipisicing 
+          elit. Dolore nisi cupiditate reiciendis eligendi ipsum corrupti id, asperiores ipsam laboriosam quis 
+          expedita nobis sed alias, nihil enim provident sit ut nemo?</p>
+      
+          <div class="hide-select">
+            <div class="row">
+              <div class="label-col">
+              <label for="add-drop-select">Add courses:</label>
+              </div>
+              <div class="input-col">
+                <select id="add-drop-select">
+                  <option value="">-- Choose a subject --</option>
+                  <% if (courses.length > 0) { %>
+                    <% courses.forEach(course => { %>
+                      <option value="<%= course.cname %>"><%= course.cname %></option>                                
+                    <% }) %>
+                  <% } else { %>
+                    <p>There are no courses to select.</p>                              
+                  <% } %>
+                </select>
+                <div class="registration error"></div>
+              </div>
+            </div>
+            <br>
+            <div class="row">              
+                <input type="button" class="add" value="Add Class " id="add-button" data-doc="<%= user._id %>">              
+            </div>
+          </div>
+          <div class="hide-select">
+            <div class="row">
+              <div class="label-col">
+                <label for="drop-select">Drop courses:</label>
+              </div>
+              <div class="input-col">
+                <select id="drop-select">
+                  <option value="">-- Choose a subject --</option>
+                  <% if (registrations.length > 0) { %>
+                    <% registrations.forEach(registration => { %>
+                      <option value="<%= registration._id %>"><%= registration.course %></option>                                
+                    <% }) %>
+                  <% } else { %>
+                    <p>There are no courses to select.</p>                              
+                  <% } %>
+                </select>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <input type="button" class="drop" value="Drop Class" id="drop-button">
+            </div>
+          </div>
+      </div>
+    </section>
+    
+  </main>
+  <%- include("./partials/footer.ejs") %>
+
+  <script>
+    const addButton = document.querySelector('input.add');
+    const dropButton = document.querySelector('input.drop');
+    const registrationError = document.querySelector('.registration.error');
+
+    // reset existing errors
+    registrationError.textContent = '';
+
+    // Add class to student's schedule
+    addButton.addEventListener('click', async (e) => {
+      const courseSelect = document.getElementById('add-drop-select');
+      const userId = addButton.dataset.doc;
+      let course = GetSelectedOption(courseSelect);
+
+      try {
+        const res = await fetch('/students', {
+          method: 'POST',
+          body: JSON.stringify({ userId, course }),
+          headers: { 'Content-Type': 'application/json' }
+        });
+        const data = await res.json();
+        if(data.errors) {
+          registrationError.textContent = data.errors.course;
+        }
+        else {
+          window.location.reload();          
+        }
+      } 
+      catch (err) {
+        console.log(err);
+      }
+    });
+
+    // Drop class from a student's schedule
+    dropButton.addEventListener('click', async (e) => {      
+      const dropSelect = document.getElementById('drop-select');
+      let registrationId = GetSelectedOption(dropSelect);
+      const endPoint = `/students/${registrationId}`;
+      
+      fetch(endPoint, {
+        method: 'DELETE'
+      })
+        .then((response) => response.json())
+        .then((data) => window.location.href = data.redirect)
+        .catch(err => console.log(err));      
+    });
+
+    // Function to hide the add/drop section
+    function hideFunction() {
+      var x = document.getElementById("hidden"),
+      displayValue = "";
+      if (x.style.display == "")
+      displayValue = "none";
+
+      x.style.display = displayValue;
+    }
+
+    // Determine the id for the currently selected course
+    function GetSelectedOption(select) {
+      let options = select.getElementsByTagName('option');
+      resultId = options[select.selectedIndex].value;
+      return resultId;
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<html lang="en">
+<%- include("./partials/head.ejs") %>
+
+<body>
+    <%- include("./partials/navbar.ejs") %>  
+
+  <main class="content">
+
+    <section id="courses-offered">
+      <div class="section-inner">
+        <h1>Our Course Offerings</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur voluptatum maxime beatae qui quod. Amet minus accusantium nesciunt provident, sint tempore ratione aliquam sed harum labore possimus sit laudantium nisi.</p>
+      </div>
+    </section>
+
+    <section id="course-list">
+      <div class="section-inner">
+        <h2 class="courses">Courses</h2>
+        <% if (courses.length > 0) { %>
+            <% courses.forEach(course => { %>
+              <a class= "single-course" href="/courses/<%= course._id %>">
+                <h3><span class="course-title"><%= course.cname %></span> <span class="credits">| <%= course.sarea %> | <%= course.chours %> Credits</span></h3>
+                <p class="ellipsis"><%= course.cdescript %></p>
+              </a>
+            <% }) %>
+        <% } else { %>
+            <p>There are no courses to display...</p>
+        <% } %>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+<%- include("./partials/footer.ejs") %>
+
+</html>

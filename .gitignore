@@ -1,0 +1,2 @@
+# ignore all node module files when pushing to github
+node_modules/

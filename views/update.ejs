@@ -1,0 +1,91 @@
+<html lang="en">
+<%- include("./partials/head.ejs") %>
+
+<body>
+    <%- include("./partials/navbar.ejs") %>  
+
+  <main class="content">
+
+    <section id="modify">
+      <div class="section-inner">
+        <h1>Modify Courses</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. At deserunt magni molestiae. Est, minus? Obcaecati nemo modi, necessitatibus possimus deserunt tempora fugit numquam animi! Cum exercitationem deserunt nemo numquam suscipit!</p>
+      </div>
+    </section>
+
+    <section id="modify-class">
+        <div class="add-section">
+          <h2>Modify Class</h2>
+            <form action="/courses/<%= course._id %>" method="POST">
+                          <div class="row">
+                            <div class="label-col">
+                              <label for="cname">Course Name</label>
+                            </div>
+                            <div class="input-col">
+                              <input type="text" id="cname" name="cname" value="<%= course.cname %>" required>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="label-col">
+                              <label for="cdescript">Course Description</label>
+                            </div>
+                            <div class="input-col">
+                              <textarea id="cdescript" name="cdescript" required rows="4" cols="50"><%= course.cdescript %></textarea>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="label-col">
+                              <label for="sarea">Subject Area</label>
+                            </div>
+                            <div class="input-col">
+                              <select name="sarea" id="sarea" required>
+                                <option value="<%= course.sarea %>" selected disabled hidden><%= course.sarea %></option>
+                                <% if (subjects.length > 0) { %>
+                                  <% subjects.forEach(subject => { %>
+                                    <option value="<%= subject.title %>"><%= subject.title %></option>                                
+                                  <% }) %>
+                                <% } else { %>
+                                  <p>There are no subjects to select.</p>                              
+                                <% } %>
+                              </select>                            
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="label-col">
+                              <label for="chours">Credit Hours</label>
+                            </div>
+                            <div class="input-col">
+                              <input type="text" id="chours" name="chours" value="<%= course.chours %>" required>
+                            </div>
+                          </div>
+                          <br>
+                          <div class="row">
+                            <input type="button" value="Delete" id="delete-button" data-doc="<%= course._id %>">
+                            <input type="submit" value="Update">
+                          </div>
+            </form>        
+          
+        </div>
+      </section>
+
+    </main>
+    <%- include("./partials/footer.ejs") %>
+
+    <script>
+      const deleteButton = document.getElementById('delete-button');
+
+      deleteButton.addEventListener('click', (e) => {      
+        const endPoint = `/courses/${deleteButton.dataset.doc}`;
+  
+        fetch(endPoint, {
+          method: 'DELETE'
+        })
+        .then((response) => response.json())
+          .then((data) => window.location.href = data.redirect)
+          .catch(err => console.log(err));
+      });
+    </script>
+  
+</body>
+  
+</html>
