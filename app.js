@@ -18,9 +18,6 @@ const studentRoutes = require('./routes/studentRoutes');
 const Course = require('./models/Course');
 const Subject = require('./models/Subject');
 
-// Get config settings
-const config = require('./config');
-
 // Setup express application
 const app = express();
 app.use(express.static('public'));
